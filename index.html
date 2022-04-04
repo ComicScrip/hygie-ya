@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>"
+    />
+    <link rel=“preload” href=“/SnakeChan.woff” as=“SnakeChan”>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Snake</h1>
+    <div id="game-container">
+      <canvas id="game" width="400" height="400"></canvas>
+    </div>
+    <div class="info-container">
+      <p id="time">00:00</p>
+      <p id="score">0 pt</p>
+      <p id="speed">Speed : 0</p>
+    </div>
+
+    <form id="optionsForm">
+      <h2>Options</h2>
+      <div class="field">
+        <label for="hasWalls">
+          Walls
+          <input id="hasWalls" type="checkbox" />
+        </label>
+      </div>
+      <div class="field">
+        <label for="vol"
+          >Volume :
+          <input type="range" id="vol" name="vol" min="0" max="100" />
+        </label>
+      </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script src="GameObject.js"></script>
+    <script src="SnakePart.js"></script>
+    <script src="Apple.js"></script>
+    <script src="Snake.js"></script>
+    <script src="Game.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
