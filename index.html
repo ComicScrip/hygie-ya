@@ -14,31 +14,41 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Snake</h1>
-    <div id="game-container">
-      <canvas id="game" width="400" height="400"></canvas>
-    </div>
-    <div class="info-container">
-      <p id="time">00:00</p>
-      <p id="score">0 pt</p>
-      <p id="speed">Speed : 0</p>
-    </div>
+    <div class="container">
+      <h1>Snake</h1>
+      <div>
+        <div class="info-container">
+          <p id="time">00:00</p>
+          <p id="score">0 pt</p>
+          <p id="speed">Speed : 0</p>
+        </div>
+        <div id="game-container">
+          <canvas id="game" width="400" height="400"></canvas>
+        </div>
 
-    <form id="optionsForm">
-      <h2>Options</h2>
-      <div class="field">
-        <label for="hasWalls">
-          Walls
-          <input id="hasWalls" type="checkbox" />
-        </label>
+        <form id="optionsForm">
+          <div class="field">
+            <label for="hasWalls">
+              Walls
+              <input id="hasWalls" type="checkbox" />
+            </label>
+          </div>
+          <div class="field">
+            <label for="vol"
+              >Volume :
+              <input type="range" id="vol" name="vol" min="0" max="100" />
+            </label>
+          </div>
+        </form>
       </div>
-      <div class="field">
-        <label for="vol"
-          >Volume :
-          <input type="range" id="vol" name="vol" min="0" max="100" />
-        </label>
+
+      <div id="gamepad">
+        <i class="arrow left"></i>
+        <i class="arrow up"></i>
+        <i class="arrow right"></i>
+        <i class="arrow down"></i>
       </div>
-    </form>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 

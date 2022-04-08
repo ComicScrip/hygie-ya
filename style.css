@@ -1,6 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0px;
-  background-color: rgb(44, 44, 44);
+  background-color: rgb(10, 10, 10);
   padding: 0px;
   display: flex;
   flex-direction: column;
@@ -10,10 +15,23 @@ body {
   color: #87c032;
 }
 
+html,
+body {
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 h1 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
   font-size: 2rem;
+  margin: 0;
   letter-spacing: 0.3ch;
   text-shadow: rgb(0, 0, 0) 1px 1px 5px;
 }
@@ -26,31 +44,38 @@ h1::first-letter {
 
 .info-container {
   display: flex;
-  margin-top: 15px;
-  max-width: 320px;
+  width: 100%;
   justify-content: space-between;
-  width: 400px;
   color: rgb(146, 199, 68);
+  position: relative;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-bottom: 15px;
 }
 
-#time {
-  width: 80px;
+.info-container p {
+  width: 100px;
+}
+
+#speed {
+  width: 120px;
 }
 
 #game-container {
-  width: 396px;
-  height: 396px;
+  width: 400px;
+  height: 400px;
   overflow: hidden;
-  box-shadow: rgba(190, 235, 163, 0.164) 10px 10px 100px;
+  box-shadow: rgb(70 139 28 / 16%) 10px 10px 100px;
 }
 
 #optionsForm {
-  margin-top: 30px;
+  margin-top: 15px;
+  width: 100%;
   text-align: center;
-}
-
-.field {
-  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /*Chrome*/
@@ -77,4 +102,48 @@ h1::first-letter {
     background: #434343;
     box-shadow: -80px 0 0 80px #87c032;
   }
+}
+
+#gamepad {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  bottom: 0px;
+}
+
+.arrow {
+  border: solid #658e26;
+  border-width: 0 10px 10px 0;
+  display: inline-block;
+  padding: 10px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.arrow.active {
+  border-color: yellow;
+}
+
+.right {
+  top: 35px;
+  right: 0;
+  transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  top: 35px;
+  left: 0;
+}
+
+.up {
+  transform: rotate(-135deg);
+  top: 0;
+  right: 35px;
+}
+
+.down {
+  transform: rotate(45deg);
+  top: 70px;
+  right: 35px;
 }

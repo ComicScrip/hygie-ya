@@ -16,15 +16,14 @@ class Game {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.tileSize = this.canvas.width / this.tileCount - 2;
+    this.tileSize = this.canvas.width / this.tileCount;
     this.initObjects();
   }
 
   get isOver() {
     const { x, y, bodyParts } = this.snake;
-    const limit = this.tileCount + 1;
-    console.log(this.hasWalls);
-    if (this.hasWalls) return x < 0 || x > limit || y < 0 || y > limit;
+    const limit = this.tileCount;
+    if (this.hasWalls) return x < 0 || x >= limit || y < 0 || y >= limit;
     return bodyParts.some(
       (part) => !this.snake.digestingApple && part.collidesWith(this.snake)
     );
@@ -71,8 +70,8 @@ class Game {
   getEmptyRandomAvailableCoordinates() {
     let randPosition = {};
     do {
-      randPosition.x = randomIntFromInterval(0, this.tileCount + 1);
-      randPosition.y = randomIntFromInterval(0, this.tileCount + 1);
+      randPosition.x = randomIntFromInterval(0, this.tileCount - 1);
+      randPosition.y = randomIntFromInterval(0, this.tileCount - 1);
     } while (!this.isSpotAvailable(randPosition.x, randPosition.y));
     return randPosition;
   }
@@ -118,7 +117,7 @@ class Game {
     );
     this.ctx.font = '15px SnakeChan';
     this.ctx.fillText(
-      'Press space to resume',
+      'Click to resume',
       this.canvas.width / 2,
       this.canvas.height / 2 + 50
     );
@@ -155,7 +154,7 @@ class Game {
 
     this.ctx.font = '18px SnakeChan';
     this.ctx.fillText(
-      'Press r to restart',
+      'Click to restart',
       this.canvas.width / 2,
       this.canvas.height / 2 + 80
     );
@@ -209,8 +208,9 @@ class Game {
     else this.pause();
   }
 
-  incrementSpeed(amount = 1) {
-    if (this.isOver) return;
+  incrementSpeed(amount = 0.5) {
+    console.log(amount);
+    if (this.isOver || this.isPaused) return;
     this.speed += amount;
     if (this.speed > 60) this.speed = 60;
   }

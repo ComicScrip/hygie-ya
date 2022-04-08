@@ -33,32 +33,27 @@ class Snake extends GameObject {
   }
 
   move() {
-    if (!this.direction) return;
+    const { direction, x, y, digestingApple, game, bodyParts } = this;
+    const { hasWalls, tileCount } = game;
+    if (!direction) return;
 
-    let current = {
-      x: this.x,
-      y: this.y,
-      digestingApple: this.digestingApple,
-    };
+    let current = { x, y, digestingApple };
     let next;
 
-    if (this.direction === 'e') this.x++;
-    else if (this.direction === 'w') this.x--;
-    else if (this.direction === 's') this.y++;
-    else if (this.direction === 'n') this.y--;
+    if (direction === 'e') this.x++;
+    else if (direction === 'w') this.x--;
+    else if (direction === 's') this.y++;
+    else if (direction === 'n') this.y--;
 
-    if (!this.game.hasWalls) {
-      if (this.direction === 'e' && this.x > this.game.tileCount + 1)
-        this.x = 0;
-      if (this.direction === 'w' && this.x < 0)
-        this.x = this.game.tileCount + 1;
-      if (this.direction === 'n' && this.y < 0)
-        this.y = this.game.tileCount + 1;
-      if (this.direction === 's' && this.y > this.game.tileCount + 1)
-        this.y = 0;
+    if (!hasWalls) {
+      if (x >= tileCount - 1 && direction === 'e') this.x = 0;
+      else if (x <= 0 && direction === 'w') this.x = tileCount - 1;
+
+      if (y >= tileCount - 1 && direction === 's') this.y = 0;
+      else if (y <= 0 && direction === 'n') this.y = tileCount - 1;
     }
 
-    for (let part of this.bodyParts) {
+    for (let part of bodyParts) {
       next = {
         x: current.x,
         y: current.y,
@@ -90,11 +85,16 @@ class Snake extends GameObject {
         sound.volume =
           parseInt(localStorage.getItem('soundVolume')) / 100 || 0.25;
         sound.play();
+
+        let applesToAdd = 0;
         const lengthBonus = Math.floor(this.bodyParts.length / 10);
         const bonus = Math.random() * (lengthBonus > 3 ? 3 : lengthBonus);
-        const numberOfApplesToAdd = bonus + speed / (appleList.length * 4);
-        for (let i = 1; i < numberOfApplesToAdd; i += 1) game.addApple();
-        if (!game.appleList.length) game.addApple();
+        applesToAdd = bonus + speed / (appleList.length * 4);
+        if (game.appleList.length === 0) applesToAdd += 1;
+        else if (game.appleList.length > 10) applesToAdd = 1;
+
+        for (let i = 0; i < applesToAdd; i++) game.addApple();
+
         return true;
       }
     }
