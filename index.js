@@ -25,6 +25,7 @@ hasWallsInput.checked = localStorage.getItem('hasWalls') === 'true';
 let newSize = window.innerWidth;
 
 if (newSize > 500) newSize = 500;
+if (window.innerHeight < 800) newSize = 300;
 
 gameElement.width = newSize;
 gameElement.height = newSize;

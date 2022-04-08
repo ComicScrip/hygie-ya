@@ -29,10 +29,11 @@ class Game {
     );
   }
   get playerEfficiency() {
-    return (
-      this.playerScore &&
-      Math.round((this.playerScore * 5000) / this.elapsedTimePlaying)
-    );
+    if (this.playerScore === 0) return 0;
+    let res =
+      (this.playerScore * this.playerScore * 1000) / this.elapsedTimePlaying;
+
+    return Math.round(res);
   }
   get finalScore() {
     return this.playerScore + this.playerEfficiency;
